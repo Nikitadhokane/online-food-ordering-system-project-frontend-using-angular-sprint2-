@@ -1,0 +1,198 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <h4>My Cart</h4>
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of list">
+            <td>
+              <img
+                src="http://localhost:8080/{{ p.food.photo }}"
+                style="width: 80px"
+                class="mr-2 float-left"
+              />{{ p.food.fname }}<br />
+              ({{ p.food.category.catname }})
+            </td>
+            <td>{{ p.food.price }}</td>
+
+            <td>
+              <button
+                (click)="updateqty(p.id, p.qty - 1)"
+                class="btn btn-sm btn-info"
+              >
+                -
+              </button>
+              {{ p.qty }}
+              <button
+                (click)="updateqty(p.id, p.qty + 1)"
+                class="btn btn-sm btn-info"
+              >
+                +
+              </button>
+            </td>
+            <td>{{ p.food.price * p.qty }}</td>
+            <td>
+              <button
+                (click)="removefromwishlist(p.id)"
+                class="btn btn-danger btn-sm"
+              >
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Total</th>
+            <th colspan="3" class="text-right">{{ total }}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Check Out</h5>
+          <form>
+            <!-- <div class="form-group">
+              <label>Card No</label>
+              <input
+                type="text"
+                class="form-control"
+                maxlength="16"
+                placeholder="16-digit Card No"
+              />
+            </div>
+            <div class="form-group">
+              <label>Name on Card</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Name on card"
+              />
+            </div>
+            <div class="form-group form-row">
+              <div class="col-sm-6">
+                <label>Expiry Date</label>
+                <input
+                  type="month"
+                  class="form-control"
+                  placeholder="Name on card"
+                />
+              </div>
+              <div class="col-sm-6">
+                <label>CVV</label>
+                <input
+                  type="text"
+                  maxlength="3"
+                  class="form-control"
+                  placeholder="CVV"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Amount</label>
+              <input
+                type="text"
+                readonly
+                class="form-control"
+                value="{{ total }}"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="placeorder(null)"
+              class="btn btn-success"
+            >
+              Place Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="form-group">
+              <label>Payment Method</label>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="paymentMethod"
+                  id="cashOnDelivery"
+                  value="cashOnDelivery"
+                  [(ngModel)]="paymentMethod"
+                />
+                <label class="form-check-label" for="cashOnDelivery">
+                  Cash on Delivery
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="paymentMethod"
+                  id="onlinePayment"
+                  value="onlinePayment"
+                  [(ngModel)]="paymentMethod"
+                />
+                <label class="form-check-label" for="onlinePayment">
+                  Online Payment
+                </label>
+              </div>
+            </div>
+
+            <!-- Online Payment Details (shown if online payment is selected) -->
+            <div *ngIf="paymentMethod === 'onlinePayment'">
+              <div class="form-group">
+                <label>Card No</label>
+                <input type="text" class="form-control" maxlength="16" placeholder="16-digit Card No" />
+              </div>
+
+              <div class="form-group">
+                <label>Name on Card</label>
+                <input type="text" class="form-control" placeholder="Name on card" />
+              </div>
+
+              <div class="form-group form-row">
+                <div class="col-sm-6">
+                  <label>Expiry Date</label>
+                  <input type="month" class="form-control" placeholder="Expiry Date" />
+                </div>
+                <div class="col-sm-6">
+                  <label>CVV</label>
+                  <input type="text" maxlength="3" class="form-control" placeholder="CVV" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Amount</label>
+                <input type="text" readonly class="form-control" [value]="total" />
+              </div>
+            </div>
+
+            <!-- Place Order Button -->
+            <button type="button" (click)="placeorder()" class="btn btn-success">
+              Place Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
